@@ -22,7 +22,7 @@ router.get("/:contactId", async (req, res, next) => {
     const { contactId } = req.params;
     const result = await contactsModels.getContactById(contactId);
     if (!result) {
-      throw HttpError(404, "Not found");
+      throw new HttpError(404, "Not found");
     }
     res.json(result);
   } catch (error) {
@@ -34,7 +34,7 @@ router.post("/", async (req, res, next) => {
   try {
     const { error } = addChema.validate(req.body);
     if (error) {
-      throw HttpError(400, error.message);
+      throw new HttpError(400, error.message);
     }
     const result = await contactsModels.addContact(req.body);
     res.status(201).json(result);
@@ -48,7 +48,7 @@ router.delete("/:contactId", async (req, res, next) => {
     const { contactId } = req.params;
     const result = await contactsModels.removeContact(contactId);
     if (!result) {
-      throw HttpError(404, "Not found");
+      throw new HttpError(404, "Not found");
     }
     res.json({ message: "contact deleted" });
   } catch (error) {
@@ -60,12 +60,12 @@ router.put("/:contactId", async (req, res, next) => {
   try {
     const { error } = addChema.validate(req.body);
     if (error) {
-      throw HttpError(400, error.message);
+      throw new HttpError(400, error.message);
     }
     const { contactId } = req.params;
     const result = await contactsModels.updateContact(contactId, req.body);
     if (!result) {
-      throw HttpError(404, "Not found");
+      throw new HttpError(404, "Not found");
     }
     res.json(result);
   } catch (error) {
