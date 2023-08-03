@@ -1,18 +1,12 @@
 const express = require("express");
 
-const Joi = require("joi");
-
 const router = express.Router();
 
 const contactsModels = require("../../models/contacts");
 
 const { HttpError } = require("../../helpers");
 
-const addChema = Joi.object({
-  name: Joi.string().required(),
-  email: Joi.string().required(),
-  phone: Joi.string().required(),
-});
+const { addChema } = require("../../utils/validation/contactValidationSchemas");
 
 router.get("/", async (req, res, next) => {
   try {
