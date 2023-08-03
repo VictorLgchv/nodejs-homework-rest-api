@@ -53,7 +53,6 @@ router.delete("/:contactId", async (req, res, next) => {
   try {
     const { contactId } = req.params;
     const result = await contactsModels.removeContact(contactId);
-    console.log(result);
     if (!result) {
       throw HttpError(404, "Not found");
     }
