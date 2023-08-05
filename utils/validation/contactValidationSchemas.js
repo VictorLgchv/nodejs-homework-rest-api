@@ -14,4 +14,4 @@ const appdateFavoriteSchema = Joi.object({
 module.exports = {
   addSchema,
   appdateFavoriteSchema,
-}
+};
