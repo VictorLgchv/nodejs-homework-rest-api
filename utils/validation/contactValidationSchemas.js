@@ -1,11 +1,17 @@
 const Joi = require("joi");
 
-const addChema = Joi.object({
+const addSchema = Joi.object({
   name: Joi.string().required(),
   email: Joi.string().required(),
   phone: Joi.string().required(),
+  favorite: Joi.boolean(),
+});
+
+const appdateFavoriteSchema = Joi.object({
+  favorite: Joi.boolean().required(),
 });
 
 module.exports = {
-  addChema,
-}
+  addSchema,
+  appdateFavoriteSchema,
+};
