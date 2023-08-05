@@ -4,7 +4,9 @@ const router = express.Router();
 
 const { HttpError } = require("../../helpers/index");
 
-const { Contact, schemas } = require("../../models/contact");
+const { Contact } = require("../../models/contact");
+
+const {addSchema, appdateFavoriteSchema} = require("../../utils/validation/contactValidationSchemas")
 
 const { isValidId } = require("../../middlewares/index");
 
@@ -32,7 +34,7 @@ router.get("/:contactId", isValidId, async (req, res, next) => {
 
 router.post("/", async (req, res, next) => {
   try {
-    const { error } = schemas.addSchema.validate(req.body);
+    const { error } = addSchema.validate(req.body);
     if (error) {
       throw new HttpError(400, error.message);
     }
@@ -58,7 +60,7 @@ router.delete("/:contactId", isValidId, async (req, res, next) => {
 
 router.put("/:contactId", isValidId, async (req, res, next) => {
   try {
-    const { error } = schemas.validate(req.body);
+    const { error } = addSchema.validate(req.body);
     if (error) {
       throw new HttpError(400, error.message);
     }
@@ -77,7 +79,7 @@ router.put("/:contactId", isValidId, async (req, res, next) => {
 
 router.patch("/:contactId/favorite", isValidId, async (req, res, next) => {
   try {
-    const { error } = schemas.appdateFavoriteSchema(req.body);
+    const { error } = appdateFavoriteSchema(req.body);
     if (error) {
       throw new HttpError(400, error.message);
     }
