@@ -8,6 +8,7 @@ const gravatar = require("gravatar");
 const Jimp = require("jimp");
 
 const User = require("../models/user");
+
 const { HttpError, ctrlWrapper } = require("../helpers");
 
 const { SECRET_KEY } = process.env;
@@ -84,8 +85,6 @@ const updateAvatar = async (req, res) => {
   Jimp.read(tempUpload).then((avatar) => {
     return avatar.resize(250, 250).write(tempUpload);
   });
-
-  // resizing is not working
 
   const filename = `${_id}_${originalname}`;
 
