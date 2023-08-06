@@ -6,7 +6,6 @@ const validateBody = (schema) => {
     if (error) {
       next(new HttpError(400, error.message));
     }
-
     next();
   };
 
